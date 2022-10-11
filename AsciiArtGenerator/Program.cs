@@ -10,6 +10,10 @@ namespace AsciiArtGenerator
     {
         static void Main(string[] args)
         {
+            string path = Autocomplete.takePath();
+
+            Console.WriteLine("Press Any key to Exit ");
+            Console.ReadLine();
         }
     }
 }
