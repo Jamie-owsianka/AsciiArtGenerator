@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace AsciiArtGenerator
 {
-    class Autocomplete
+    class Autocomplete //class used to read inputs and autocomplete paths
     {
-        public static string takePath()//function to get a file path 
+        //function to get a file path 
+        public static string takePath()
         {
             string path = "";
             Console.WriteLine("Please enter path to image ");
@@ -24,7 +25,8 @@ namespace AsciiArtGenerator
                     case ConsoleKey.Spacebar://dont add the space to path 
                         break;
                     case ConsoleKey.Backspace://remove a character
-                        path = path.Remove(path.Length - 1);
+                        if (path.Length > 0)
+                            {path = path.Remove(path.Length - 1);}
                         break;
                     case ConsoleKey.Enter://do nothing
                         break;
@@ -36,10 +38,39 @@ namespace AsciiArtGenerator
                 Console.Write(path);
             }
             while (key.Key != ConsoleKey.Enter);
-            Console.WriteLine(""); //newline
+            Console.WriteLine(""); //newline after input
+
+            //testing
+            List<string> files = listFiles(path);
+            for (int i = 0; i <files.Count();i++)
+            {
+                Console.WriteLine(files[i]);
+            }
             return path;
         }
-
+        //lists files in a given directory
+        private static List<string> listFiles(string currentDirectory)
+        {
+            List<string> files = new List<string>();
+            if (currentDirectory == "") // with no path at all, we just want the top level option. 
+            {
+                files.Add("C:\\");
+                return files;
+            }
+            //get a list of files, and find names
+            System.IO.FileInfo[] fileArray = new System.IO.DirectoryInfo(currentDirectory).GetFiles();
+            string[] fileNames = new string[fileArray.Length];
+            for (int i = 0; i < fileArray.Length;i++)
+            {
+                fileNames[i] = fileArray[i].Name;
+            }
+            files = fileNames.Cast<string>().ToList();
+            for (int i = 0; i < files.Count(); i++)
+            {
+                Console.WriteLine(files[i]);
+            }
+            return files;
+        }
     }
 }
 
