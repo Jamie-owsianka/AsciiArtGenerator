@@ -88,21 +88,12 @@ namespace AsciiArtGenerator
             }
             string rootPath = Path.GetPathRoot(AppDomain.CurrentDomain.FriendlyName);
             FileInfo[] fileArray = new DirectoryInfo(rootPath + currentDirectory).GetFiles();
-            if (!(fileArray.Length > 0))//if no files
-            {
-                //files.Add("");
-                //return files;
-            }
             string[] fileNames = new string[fileArray.Length];//get list of filenames from files
             for (int i = 0; i < fileArray.Length;i++)
             {
                 fileNames[i] = fileArray[i].Name;
             }
             files = fileNames.Cast<string>().ToList();
-            //for (int i = 0; i < files.Count(); i++)
-            //{
-                //Console.WriteLine(files[i]);
-            //}
             return files;
         }
         /// <summary>
