@@ -10,7 +10,7 @@ At this time I am not following any guides, just expermenting with different tec
 An iinital choice I had was to use either read or readkey for sampling keystrokes. At first read seemed eaiser, as it keeps case, but due to it blocking its return, as well as marked not preferable by microsoft, lead me to use readkey. An advantage of this is that I am able to use "ConsoleKey.xxx" to check for certain button presses, instead of using ascii codes which look less clear.
 
 ## Still TODO
--user settings for image size and resolution produced
--imgage processing
--conversion to ascii
--error handling and permissions for autocomplete
+* user settings for image size and resolution produced
+* imgage processing
+* conversion to ascii
+* error handling and permissions for autocomplete
