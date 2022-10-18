@@ -39,6 +39,8 @@ namespace AsciiArtGenerator
                             {
                             path = path.Remove(path.Length - 1);
                             }
+                        suggestion.setSuggestions(listFiles(justPath(path)), afterPath(path));//lists files for current paths
+                        suggestion.addSuggestion(afterPath(path));//adds current path so user can cycle back to it  
                         break;
                     case ConsoleKey.Enter://do nothing
                         break;
@@ -62,15 +64,6 @@ namespace AsciiArtGenerator
             while (key.Key != ConsoleKey.Enter);
             Console.WriteLine(""); //newline after input
 
-            //testing
-            if (false)
-            {
-                List<string> files = listFiles(path);
-                for (int i = 0; i < files.Count(); i++)
-                {
-                    Console.WriteLine(files[i]);
-                }
-            }
             return path;
         }
         /// <summary>
@@ -81,20 +74,16 @@ namespace AsciiArtGenerator
         private static List<string> listFiles(string currentDirectory)
         {
             List<string> files = new List<string>();
-            if (currentDirectory == "") // with no path at all, we just want the top level option. 
+            var directories = Directory.GetDirectories("C:\\" + currentDirectory);
+            files.AddRange(directories);
+            for (int i = 0; i < files.Count; i++)
             {
-                files.Add("C:\\");
-                return files;
+                files[i] = afterPath(files[i]); 
+                //Console.WriteLine(files[i]);
             }
-            string rootPath = Path.GetPathRoot(AppDomain.CurrentDomain.FriendlyName);
-            FileInfo[] fileArray = new DirectoryInfo(rootPath + currentDirectory).GetFiles();
-            string[] fileNames = new string[fileArray.Length];//get list of filenames from files
-            for (int i = 0; i < fileArray.Length;i++)
-            {
-                fileNames[i] = fileArray[i].Name;
-            }
-            files = fileNames.Cast<string>().ToList();
             return files;
+
+
         }
         /// <summary>
         /// gets the string after the last backslash

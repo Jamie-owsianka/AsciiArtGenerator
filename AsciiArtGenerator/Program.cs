@@ -10,8 +10,26 @@ namespace AsciiArtGenerator
     {
         static void Main(string[] args)
         {
-            string path = Autocomplete.takePath();
-
+            
+            
+            
+            bool gotPath = false;
+            while (!gotPath)
+            {
+                string path = Autocomplete.takePath();
+                string ready = "";
+                while (ready != "Y" && ready != "n")
+                {
+                    Console.WriteLine("path is: " + path);
+                    Console.WriteLine("Is this the correct path? Y/n ");
+                    ready = Console.ReadLine();
+                }
+                if (ready == "Y")
+                {
+                    gotPath = true;
+                }
+            }
+            
             Console.WriteLine("Press Any key to Exit ");
             Console.ReadLine();
         }
