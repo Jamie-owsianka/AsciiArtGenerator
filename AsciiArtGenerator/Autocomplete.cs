@@ -73,15 +73,18 @@ namespace AsciiArtGenerator
         /// <returns>List of strings containing the name of each file in that directory</returns>
         private static List<string> listFiles(string currentDirectory)
         {
-            List<string> files = new List<string>();
+            List<string> allFiles = new List<string>();
             var directories = Directory.GetDirectories("C:\\" + currentDirectory);
-            files.AddRange(directories);
-            for (int i = 0; i < files.Count; i++)
+            allFiles.AddRange(directories);
+            var files = Directory.GetFiles("C:\\" + currentDirectory);
+            allFiles.AddRange(files);
+            for (int i = 0; i < allFiles.Count; i++)
             {
-                files[i] = afterPath(files[i]); 
-                //Console.WriteLine(files[i]);
+                allFiles[i] = afterPath(allFiles[i]); 
             }
-            return files;
+            allFiles.Sort(); // to keep everything in alphabetical order
+            
+            return allFiles;
 
 
         }
